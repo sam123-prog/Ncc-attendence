@@ -1,23 +1,207 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>NCC Attendance System</title>
-<link rel="stylesheet" href="style.css">
+
+<style>
+
+body{
+font-family: Arial;
+margin:0;
+padding:0;
+background:#f2f2f2;
+display:flex;
+justify-content:center;
+align-items:center;
+height:100vh;
+}
+
+.dark{
+background:#121212;
+color:white;
+}
+
+.container{
+width:90%;
+max-width:400px;
+background:white;
+padding:25px;
+border-radius:10px;
+box-shadow:0 0 10px rgba(0,0,0,0.2);
+text-align:center;
+}
+
+.dark .container{
+background:#1e1e1e;
+}
+
+button{
+width:100%;
+padding:12px;
+margin:8px 0;
+border:none;
+border-radius:6px;
+font-size:16px;
+cursor:pointer;
+}
+
+.cadet{
+background:#4CAF50;
+color:white;
+}
+
+.admin{
+background:#2196F3;
+color:white;
+}
+
+.master{
+background:#9C27B0;
+color:white;
+}
+
+.login-btn{
+background:#4CAF50;
+color:white;
+}
+
+input{
+width:100%;
+padding:10px;
+margin:10px 0;
+border:1px solid #ccc;
+border-radius:5px;
+}
+
+.toggle-bar{
+position:fixed;
+top:10px;
+right:10px;
+}
+
+.switch-btn{
+padding:8px;
+margin-left:5px;
+}
+
+.desktop-mode{
+max-width:900px;
+}
+
+</style>
+
 </head>
 
 <body>
 
-<div class="login-box">
-<h1>NCC Attendance System</h1>
+<div class="toggle-bar">
 
-<input type="text" placeholder="Username" id="username">
-<input type="password" placeholder="Password" id="password">
+<button onclick="toggleDark()">🌙</button>
 
-<button onclick="login()">Login</button>
+<button onclick="toggleDesktop()">🖥</button>
 
 </div>
 
-<script src="script.js"></script>
+
+<div class="container" id="main">
+
+<h2>NCC Attendance System</h2>
+
+<div id="roleSelection">
+
+<p>Select Role</p>
+
+<button class="cadet" onclick="showLogin('Cadet')">Cadet</button>
+
+<button class="admin" onclick="showLogin('Institute Admin')">Institute Admin</button>
+
+<button class="master" onclick="showLogin('Master Admin')">Master Admin</button>
+
+</div>
+
+<div id="loginScreen" style="display:none;">
+
+<h3 id="roleTitle"></h3>
+
+<input type="text" placeholder="Username">
+
+<input type="password" placeholder="Password">
+
+<button class="login-btn" onclick="login()">Login</button>
+
+<br>
+
+<button onclick="goBack()">Back</button>
+
+</div>
+
+<div id="dashboard" style="display:none;">
+
+<h3 id="dashboardTitle"></h3>
+
+<p>Welcome to dashboard</p>
+
+<button onclick="logout()">Logout</button>
+
+</div>
+
+</div>
+
+<script>
+
+function showLogin(role){
+
+document.getElementById("roleSelection").style.display="none"
+
+document.getElementById("loginScreen").style.display="block"
+
+document.getElementById("roleTitle").innerText = role + " Login"
+
+}
+
+function goBack(){
+
+document.getElementById("loginScreen").style.display="none"
+
+document.getElementById("roleSelection").style.display="block"
+
+}
+
+function login(){
+
+document.getElementById("loginScreen").style.display="none"
+
+document.getElementById("dashboard").style.display="block"
+
+document.getElementById("dashboardTitle").innerText="Dashboard"
+
+}
+
+function logout(){
+
+document.getElementById("dashboard").style.display="none"
+
+document.getElementById("roleSelection").style.display="block"
+
+}
+
+function toggleDark(){
+
+document.body.classList.toggle("dark")
+
+}
+
+function toggleDesktop(){
+
+document.getElementById("main").classList.toggle("desktop-mode")
+
+}
+
+</script>
 
 </body>
 </html>
